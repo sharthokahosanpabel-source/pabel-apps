@@ -16,6 +16,11 @@ jobs:
       - name: Unzip project
         run: unzip project.zip
 
+      - name: Fix Gradle file
+        run: |
+          sed -i 's/versionCode = flutter.versionCode/versionCode = flutter.versionCode.toInteger()/g' android/app/build.gradle.kts
+          sed -i 's/versionName = flutter.versionName/versionName = flutter.versionName/g' android/app/build.gradle.kts
+
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
