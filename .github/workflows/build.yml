@@ -16,15 +16,15 @@ jobs:
       - name: Unzip project
         run: unzip project.zip
 
-      - name: Fix Gradle file
-        run: |
-          sed -i 's/versionCode = flutter.versionCode/versionCode = flutter.versionCode.toInteger()/g' android/app/build.gradle.kts
-          sed -i 's/versionName = flutter.versionName/versionName = flutter.versionName/g' android/app/build.gradle.kts
-
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.22.0'
+
+      - name: Fix Gradle file
+        run: |
+          sed -i 's/versionCode = flutter.versionCode/versionCode = 1/g' android/app/build.gradle.kts
+          sed -i 's/versionName = flutter.versionName/versionName = "1.0"/g' android/app/build.gradle.kts
 
       - name: Install dependencies
         run: flutter pub get
